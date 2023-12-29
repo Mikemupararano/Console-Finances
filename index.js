@@ -100,43 +100,33 @@ const calculations=(num)=> {
   let greatestIncrease = { date: "", amount: -Infinity };
   let greatestDecrease = { date: "", amount: Infinity };
 
-  for (let i = 0; i < numberOfMonths; i++) {
-    const currentData = num[i];
-    const currentAmount = currentData[1];
+  
+//Alternative block of code
+num.forEach((currentData, i) => {
+  const currentAmount = currentData[1];
 
-    // Calculate total profit/loss
-    totalProfitLoss += currentAmount;
+  // Calculate total profit/loss
+  totalProfitLoss += currentAmount;
 
-    // Calculate change in profit/loss (skip for the first month)
-    
-    if (i > 0) {
-      const change = currentAmount - num[i - 1][1];
-      totalChange = totalChange + change;
-     switch (change) {
-        case change > greatestIncrease.amount:
-        greatestIncrease.date = currentData[0];
-        greatestIncrease.amount = change; 
-        break;
-        case change < greatestDecrease.amount:
-        greatestDecrease.date = currentData[0];
-        greatestDecrease.amount = change; 
-        break;
-      }
+  // Calculate change in profit/loss (skip for the first month)
+  if (i > 0) {
+    const change = currentAmount - num[i - 1][1];
+    totalChange += change;
 
-      // Update greatest increase and decrease
-      /*if (change > greatestIncrease.amount) {
-        greatestIncrease.date = currentData[0];
-        greatestIncrease.amount = change;
-      }
-
-      if (change < greatestDecrease.amount) {
-        greatestDecrease.date = currentData[0];
-        greatestDecrease.amount = change;
-      }*/
+    // Update greatest increase and decrease
+    if (change > greatestIncrease.amount) {
+      greatestIncrease.date = currentData[0];
+      greatestIncrease.amount = change;
     }
-    
-  }
 
+    if (change < greatestDecrease.amount) {
+      greatestDecrease.date = currentData[0];
+      greatestDecrease.amount = change;
+    }
+  }
+});
+
+// End of alternative block of code
   // Calculate average change
   const averageChange = totalChange / (numberOfMonths - 1);
 
