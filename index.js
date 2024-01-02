@@ -1,3 +1,4 @@
+//Array used for data analysis starts here.
 var finances = [
   ['Jan-2010', 867884],
   ['Feb-2010', 984655],
@@ -86,14 +87,15 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
-//Printing headings
+//End of array used for data analysis.
+//Printing formatted headings
 let heading='Financial Analysis';
 let dashedLine="----------------";
 console.log(heading);
 console.log(dashedLine);
-//Total  number of months
+//Determining the total  number of months
 let numberOfMonths=finances.length;
-// Function to calculate financial analysis
+// How the financial analysis has been calculated using this arrow function.
 const calculations=(num)=> {
   let totalProfitLoss = 0;
   let totalChange = 0;
@@ -101,19 +103,19 @@ const calculations=(num)=> {
   let greatestDecrease = { date: "", amount: Infinity };
 
   
-//Alternative block of code
+//ForEach to iterate through the array list
 num.forEach((currentData, i) => {
   const currentAmount = currentData[1];
 
   // Calculate total profit/loss
   totalProfitLoss += currentAmount;
 
-  // Calculate change in profit/loss (skip for the first month)
+  // Resolved to leave out the first month to calculate thr profit and loss.
   if (i > 0) {
     const change = currentAmount - num[i - 1][1];
     totalChange += change;
 
-    // Update greatest increase and decrease
+    //Determine greatest increase & decrease using a for loop:
     if (change > greatestIncrease.amount) {
       greatestIncrease.date = currentData[0];
       greatestIncrease.amount = change;
@@ -125,12 +127,12 @@ num.forEach((currentData, i) => {
     }
   }
 });
+//End of forEach 
 
-// End of alternative block of code
   // Calculate average change
   const averageChange = totalChange / (numberOfMonths - 1);
 
-  // Print the results
+  // String concatenation and having the results printed:
   console.log("Total Months:", numberOfMonths);
   console.log("Total: $" + totalProfitLoss.toLocaleString());
   console.log("Average Change: $" + averageChange.toFixed(2));
@@ -146,7 +148,7 @@ num.forEach((currentData, i) => {
   );
 }
 
-// Call the function with the provided finances dataset
+// Here I call the calculations arrow function but with the finances data.
 calculations(finances);
 
 
